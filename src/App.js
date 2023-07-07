@@ -1,0 +1,48 @@
+import id from './locales/id';
+import web from './web';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import MyRoutes from './components/MyRoutes';
+import Alert from './components/Alert';
+import Header from './components/Header';
+import MobileMenu from './components/MobileMenu';
+import Login from './components/Login';
+import Footer from './components/Footer';
+import Main from './components/Main';
+
+window.web = web;
+
+export default () => {
+
+  const [render, setRender] = useState(1);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate = useNavigate();
+  const {strg, dstrg} = window.web;
+
+  window.web.render    = ()   => setRender(render * -1);
+  window.web.navigate  = path => navigate(path);
+  window.onstorage     = ()   => window.web.render();
+
+  useEffect(() => {
+    window.web.axios({url:'login-check'})
+    .then(r => strg('is_login', true))
+    .catch(e => dstrg('is_login'));
+  }, []);
+
+  if(!strg('is_login'))
+    return <Login/>;
+
+  return (
+    <>
+      <Header onMenuClick={e => setMobileMenu(!mobileMenu)}/>
+      <Main/>
+      <Alert/>
+      <MobileMenu
+        open={mobileMenu}
+        onClose={e => setMobileMenu(!mobileMenu)}
+        onOpen={e => setMobileMenu(!mobileMenu)}/>
+      <Footer/>
+    </>
+  );
+};
