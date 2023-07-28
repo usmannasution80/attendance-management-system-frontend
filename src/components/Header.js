@@ -1,10 +1,11 @@
 import {
   Grid,
   Box,
-  Button
+  Button,
+  Paper
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import {green} from '@mui/material/colors';
+import {useRef} from 'react';
 
 export default ({onMenuClick}) => {
 
@@ -13,14 +14,28 @@ export default ({onMenuClick}) => {
     isMobile
   } = window.web;
 
+  const headerStyle = {
+
+    position : 'fixed',
+    top      : 0      ,
+    left     : 0      ,
+    width    : '100%' ,
+    zIndex   : 1      ,
+
+  };
+
   return (
+    <div
+      ref={ref => document.body.style.paddingTop = ref ? ref.offsetHeight + 'px' : 0}
+      style={headerStyle}>
+    <Paper sx={{m:1, mb:0}}>
     <Grid
       container
       direction="row"
       justifyContent="flex-start"
       alignItems="center"
       spacing={1}
-      sx={{p:1, background:green[400]}}>
+      sx={{p:1}}>
 
       {isMobile() &&
         <Grid item>
@@ -41,5 +56,7 @@ export default ({onMenuClick}) => {
           children={_('header')}/>
       </Grid>
     </Grid>
+    </Paper>
+    </div>
   );
 };

@@ -16,7 +16,7 @@ export default () => {
   return (
     <Snackbar
       open={!!open}
-      onClose={e => window.web.set('alert', {})}>
+      onClose={e => window.web.set('alertProps', {})}>
       <Alert
         severity={severity}
         sx={{width:'100%'}}

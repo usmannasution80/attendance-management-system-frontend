@@ -14,12 +14,14 @@ export default () => {
     _,
     props,
     login,
+    strg,
     navigate,
     alert,
-    axios
+    axios,
+    axiosErrorHandling
   } = window.web;
 
-  const email = useRef('');
+  const email    = useRef('');
   const password = useRef('');
   
   const loginHandler = e => {
@@ -27,20 +29,14 @@ export default () => {
     axios({
       url    : 'login',
       method : 'POST',
+      loading: true,
       data   : {
         email    : email.current,
         password : password.current
       }
     })
-    .then(r => navigate('/'))
-    .catch(e => console.log(e));
-    return;
-
-    if(login(email.current, password.current))
-      navigate('/');
-    else
-      alert('error', _('msg_login_fail'));
-
+    .then(r => strg('is_login', true))
+    .catch(axiosErrorHandling);
   };
 
   return (

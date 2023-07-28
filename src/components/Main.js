@@ -15,7 +15,7 @@ export default () => {
     <Grid container>
 
       {!isMobile() &&
-        <Grid item sx={{}}>
+        <Grid item>
           <Paper>
             <Menu/>
           </Paper>

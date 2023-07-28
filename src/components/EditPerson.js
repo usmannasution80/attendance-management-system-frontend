@@ -11,7 +11,8 @@ import {
 } from '@mui/material';
 import Select from './Select';
 import Title from './Title';
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -21,8 +22,19 @@ export default () => {
     _,
     minGrade,
     maxGrade,
-    departments
+    departments,
+    axios,
+    navigate,
+    alert,
+    users,
+    axiosErrorHandling,
   } = window.web;
+
+  const {user_id} = useParams();
+  let user = null;
+
+  if(user_id)
+    user = users[user_id];
 
   const name = useRef('');
   const [role, setRole] = useState('');
@@ -55,16 +67,47 @@ export default () => {
   })();
 
   const save = () => {
+
     const data = {
       name : name.current,
       role : role
     };
+
+    if(user)
+      data.id = user.id;
+
     if(role === 'student')
       Object.assign(data, {grade, department, ['class']:cls});
-    if(isAdmin)
-      data.email = email.current;
-    alert(JSON.stringify(data))
+
+    if(isAdmin){
+      data.email    = email.current;
+      data.is_admin = true;
+    }
+
+    axios({
+      url    : 'user/' + (user ? 'update' : 'create'),
+      method : 'POST',
+      data   : data,
+      loading: true
+    })
+    .then(r => navigate('/'))
+    .catch(axiosErrorHandling);
+
   };
+
+  useEffect(() => {
+    if(user){
+      name.current = user.name;
+      setRole(user.grade ? 'student' : 'teacher');
+      if(user.grade){
+        setGrade(user.grade);
+        setDepartment(user.department);
+        setCls(user['class']);
+      }
+      email.current = user.email || '';
+      setIsAdmin(user.is_admin);
+    }
+  }, []);
 
   return (
     <>
@@ -73,6 +116,7 @@ export default () => {
 
       <TextField
         label={_('lbl_name')}
+        defaultValue={user ? user.name : ''}
         onChange={e => name.current = e.target.value}/>
 
       <Select
@@ -121,6 +165,7 @@ export default () => {
       <TextField
         label={_('lbl_email')}
         sx={{display : isAdmin ? undefined : 'none'}}
+        defaultValue={user ? user.email || '' : ''}
         onChange={e => email.current = e.target.value}/>
 
       <Box sx={{textAlign:'right',mt:1}}>

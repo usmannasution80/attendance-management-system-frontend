@@ -8,6 +8,8 @@ import {
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import LogoutIcon from '@mui/icons-material/Logout';
+import DownloadIcon from '@mui/icons-material/Download';
+import LanguageIcon from '@mui/icons-material/Language';
 
 export default () => {
 
@@ -29,12 +31,30 @@ export default () => {
         </ListItemText>
       </ListItemButton>
 
+      <ListItemButton onClick={e => navigate('/download-cards')}>
+        <ListItemIcon>
+          <DownloadIcon/>
+        </ListItemIcon>
+        <ListItemText>
+          {_('lbl_download_cards')}
+        </ListItemText>
+      </ListItemButton>
+
       <ListItemButton onClick={e => navigate('/add-person')}>
         <ListItemIcon>
           <PersonAddAlt1Icon/>
         </ListItemIcon>
         <ListItemText>
           {_('lbl_add_person')}
+        </ListItemText>
+      </ListItemButton>
+
+      <ListItemButton onClick={e => navigate('/change-language')}>
+        <ListItemIcon>
+          <LanguageIcon/>
+        </ListItemIcon>
+        <ListItemText>
+          {_('lbl_change_language')}
         </ListItemText>
       </ListItemButton>
 
