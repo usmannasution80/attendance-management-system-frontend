@@ -23,9 +23,12 @@ export default () => {
   const {strg, dstrg} = window.web;
 
   window.web.render    = ()    => setRender(render * -1);
-  window.web.navigate  = path  => navigate(path);
   window.web.loading   = state => setIsLoading(state);
   window.onstorage     = ()    => window.web.render();
+  window.web.navigate  = path  => {
+    navigate(path);
+    window.web.render();
+  };
 
   useEffect(() => {
 

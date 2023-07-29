@@ -11,9 +11,11 @@ import {
 } from '@mui/material';
 import Select from './Select';
 import Title from './Title';
+import DeleteUserDialog from './DeleteUserDialog';
 import {useState, useRef, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 
+import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 
 export default () => {
@@ -37,12 +39,14 @@ export default () => {
     user = users[user_id];
 
   const name = useRef('');
+  const editDataFetched = useRef(false);
   const [role, setRole] = useState('');
   const [grade, setGrade] = useState('');
   const [department, setDepartment] = useState('');
   const [cls, setCls] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
   const email = useRef('');
+  const [deleteDialog, setDeleteDialog] = useState(false);
 
   const grades = (() => {
     const grds = {};
@@ -96,7 +100,8 @@ export default () => {
   };
 
   useEffect(() => {
-    if(user){
+    if(user && !editDataFetched.current){
+      editDataFetched.current = true;
       name.current = user.name;
       setRole(user.grade ? 'student' : 'teacher');
       if(user.grade){
@@ -107,7 +112,10 @@ export default () => {
       email.current = user.email || '';
       setIsAdmin(user.is_admin);
     }
-  }, []);
+  });
+
+  if(user_id && !user)
+    return <></>;
 
   return (
     <>
@@ -169,11 +177,25 @@ export default () => {
         onChange={e => email.current = e.target.value}/>
 
       <Box sx={{textAlign:'right',mt:1}}>
-        <Button onClick={save}>
-          <SaveIcon/>
-          {_('lbl_save')}
-        </Button>
+
+        <Button
+          onClick={e => setDeleteDialog(true)}
+          startIcon={<DeleteIcon/>}
+          color="error"
+          sx={{mx : 1, display : user ? undefined : 'none'}}
+          children={_('lbl_delete_user')}/>
+
+        <Button
+          onClick={save}
+          startIcon={<SaveIcon/>}
+          children={_('lbl_save')}/>
+
       </Box>
+
+      <DeleteUserDialog
+        id={user_id}
+        open={deleteDialog}
+        onClose={e => setDeleteDialog(false)}/>
 
     </>
   );

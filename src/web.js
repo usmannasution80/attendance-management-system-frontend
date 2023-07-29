@@ -93,7 +93,7 @@ const web =  {
       hostname,
       port
     } = window.location;
-    //port = 8000;
+    port = 8000;
     const server = `${protocol}//${hostname}:${port}/`;
 
     if(!/get/gi.test(config.method) && config.method !== undefined){

@@ -269,6 +269,9 @@ export default () => {
 
                 const user = users[id];
 
+                if(!user)
+                  continue;
+
                 if(user.is_student && isTeacher || user.is_teacher && isStudent)
                   continue;
 
