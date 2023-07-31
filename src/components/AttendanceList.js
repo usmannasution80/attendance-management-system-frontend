@@ -47,6 +47,7 @@ export default () => {
   });
 
   const audio = useRef(null);
+  const queue = useRef([]);
 
   const getLogs = () => logs.current;
 
@@ -119,6 +120,11 @@ export default () => {
   };
 
   const setStatus = (id, status, qr = false) => {
+
+    if(queue.current.indexOf(id) === -1)
+      queue.current.push(id);
+    else
+      return;
 
     const prevStatus = users[id].status;
     const prevTime   = users[id].time;
