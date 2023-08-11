@@ -6,13 +6,16 @@ import Title from './Title';
 
 export default () => {
 
-  const {_, axios} = window.web;
+  const {_, axios, loading} = window.web;
 
   const download = e => {
+    loading(true);
     axios({
-      url     : 'user/download-cards',
-      loading : true,
-    }).then(r => window.open(r.data.url, '_blank'));
+      url : 'user/download-cards'
+    }).then(r => {
+      loading(false);
+      window.open(r.data.url, '_blank');
+    });
   };
 
   return (

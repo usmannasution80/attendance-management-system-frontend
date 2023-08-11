@@ -1,5 +1,3 @@
-import {Routes, Route, useLocation} from 'react-router-dom';
-import {useEffect} from 'react';
 import Login from './Login';
 import AttendanceList from './AttendanceList';
 import EditPerson from './EditPerson';
