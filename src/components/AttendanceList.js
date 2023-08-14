@@ -12,7 +12,7 @@ import {
 import DateForm from './DateForm';
 import GradeForm from './GradeForm';
 import SetAttendanceStatus from './SetAttendanceStatus';
-import QrScanner from './QrScanner';
+import QrScannerDialog from './QrScannerDialog';
 import ScannerAudioUrl from './../scanner.mp3';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
@@ -37,19 +37,25 @@ export default () => {
     return d.getFullYear() + '-' + zeroPadding(d.getMonth() + 1, 2) + '-' + zeroPadding(d.getDate(), 2);
   })());
 
-  const [logs, setLogs] = useState([]);
+  /*const [logs, setLogs] = useState([]);
   const logsRef = useRef({
     logs,
     addLog : (time, color, text) => {
       logsRef.current.logs.push(time + ',' + color + ',' + text);
       setLogs([...logsRef.current.logs]);
     }
+  });*/
+  const logs = useRef({
+    list : [],
+    time : 0,
+    add(time, color, text){
+      this.list.push(time + ',' + color + ',' + text);
+      this.time = time;
+    },
   });
 
   const audio = useRef(null);
   const queue = useRef([]);
-
-  const getLogs = () => logs.current;
 
   const fullDateRef = useRef(fullDate);
   const [year, month, date] = fullDate.split('-');
@@ -136,14 +142,14 @@ export default () => {
     users[id].status = status;
     users[id].time   = Math.floor(Date.now());
 
-    logsRef.current.addLog(
+    logs.current.add(
       getTime(),
       'black',
       _('attendance_set_ongoing', {name : users[id].name})
     );
 
     if(prevStatus === status){
-      logsRef.current.addLog(
+      logs.current.add(
         getTime(),
         'green',
         _('attendance_set_success', {name : users[id].name, status : _(status)})
@@ -164,7 +170,7 @@ export default () => {
       loading : true
     }).then(r => {
 
-      logsRef.current.addLog(
+      logs.current.add(
         getTime(),
         'green',
         _('attendance_set_success', {name : users[id].name, status : _(status)})
@@ -177,7 +183,7 @@ export default () => {
       users[id].status = prevStatus;
       users[id].time   = prevTime;
 
-      logsRef.current.addLog(
+      logs.current.addLog(
         getTime(),
         'red',
         _('attendance_set_failed', {name : users[id].name})
@@ -334,7 +340,7 @@ export default () => {
         setStatus={setStatus}
         date={fullDate}/>
 
-      <QrScanner
+      <QrScannerDialog
         open={isScan}
         onClose={e => setIsScan(false)}
         setStatus={setStatus}

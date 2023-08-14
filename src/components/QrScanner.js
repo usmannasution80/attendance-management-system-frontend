@@ -9,17 +9,9 @@ import QrReader from 'react-qr-scanner';
 
 export default (props) => {
 
-  const {
-    open      ,
-    onClose   ,
-    logs      ,
-    setStatus ,
-  } = props;
+  const {setStatus} = props;
 
-  const {
-    users ,
-    _     ,
-  } = window.web;
+  const {users, _} = window.web;
 
   const logsRef = useRef(null);
 
@@ -45,40 +37,11 @@ export default (props) => {
 
   }
 
-  useEffect(() => {
-
-    if(logsRef.current)
-      logsRef.current.scrollTop = logsRef.current.scrollHeight;
-
-  });
-
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}>
-      <DialogContent>
-        <QrReader
-          style={{width:"100%"}}
-          onError={e => console.log(e)}
-          onScan={onScan}
-          constraints={constraints}/>
-        <Box
-          sx={{overflow:'scroll', maxHeight:'5em'}}
-          ref={logsRef}>
-          {(() => {
-            const logDivs = [];
-            for(let log of logs){
-              const [time, color, text] = log.split(',');
-              logDivs.push(
-                <div style={{color, whiteSpace:'nowrap'}}>
-                  {time} : {text}
-                </div>
-              );
-            }
-            return logDivs;
-          })()}
-        </Box>
-      </DialogContent>
-    </Dialog>
+    <QrReader
+      style={{width:"100%"}}
+      onError={e => console.log(e)}
+      onScan={onScan}
+      constraints={constraints}/>
   );
 }

@@ -18,6 +18,7 @@ export default () => {
     navigate,
     alert,
     axios,
+    loading,
     axiosErrorHandling
   } = window.web;
 
@@ -26,16 +27,20 @@ export default () => {
   
   const loginHandler = e => {
 
+    loading(true);
+
     axios({
       url    : 'login',
       method : 'POST',
-      loading: true,
       data   : {
         email    : email.current,
         password : password.current
       }
     })
-    .then(r => strg('is_login', true))
+    .then(r => {
+      strg('is_login', true);
+      loading(false);
+    })
     .catch(axiosErrorHandling);
   };
 
