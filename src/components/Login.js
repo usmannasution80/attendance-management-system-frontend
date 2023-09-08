@@ -8,7 +8,7 @@ import {
 import {useRef} from 'react';
 import Footer from './Footer';
 
-export default () => {
+function Login(){
 
   const {
     _,
@@ -87,3 +87,5 @@ export default () => {
     </Grid>
   );
 }
+
+export default Login;

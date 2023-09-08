@@ -1,7 +1,7 @@
 import {Grid} from '@mui/material';
 import Select from './Select';
 
-export default ({d, m, y, onChange}) => {
+function DateForm({d, m, y, onChange}){
 
   const {_, zeroPadding} = window.web;
 
@@ -52,4 +52,6 @@ export default ({d, m, y, onChange}) => {
       </Grid>
     </Grid>
   );
-};
+}
+
+export default DateForm;

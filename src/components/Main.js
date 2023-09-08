@@ -5,7 +5,7 @@ import {
 import Menu from './Menu';
 import MyRoutes from './MyRoutes';
 
-export default () => {
+function Main(){
 
   const {
     isMobile
@@ -31,3 +31,5 @@ export default () => {
     </Grid>
   );
 }
+
+export default Main;

@@ -3,10 +3,12 @@ import {
   CircularProgress ,
 } from '@mui/material';
 
-export default ({open}) => {
+function Loading({open}){
   return (
     <Backdrop sx={{zIndex:1000}} open={open}>
       <CircularProgress color="inherit"/>
     </Backdrop>
   );
-};
+}
+
+export default Loading;

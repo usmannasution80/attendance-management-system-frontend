@@ -1,7 +1,7 @@
 import {SwipeableDrawer} from '@mui/material';
 import Menu from './Menu';
 
-export default ({open, onClose, onOpen}) => {
+function MobileMenu({open, onClose, onOpen}){
   return (
     <SwipeableDrawer
       open={open}
@@ -13,4 +13,6 @@ export default ({open, onClose, onOpen}) => {
       <Menu/>
     </SwipeableDrawer>
   );
-};
+}
+
+export default MobileMenu;

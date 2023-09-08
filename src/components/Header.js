@@ -7,7 +7,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import {useRef} from 'react';
 
-export default ({onMenuClick}) => {
+function Header({onMenuClick}){
 
   const {
     _,
@@ -59,4 +59,6 @@ export default ({onMenuClick}) => {
     </Paper>
     </div>
   );
-};
+}
+
+export default Header;

@@ -13,7 +13,7 @@ import Loading from './components/Loading';
 import BackgroundImage from './bg.jpg';
 window.web = web;
 
-export default () => {
+function App(){
 
   const [render, setRender] = useState(1);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -62,4 +62,6 @@ export default () => {
       <Loading open={isLoading}/>
     </>
   );
-};
+}
+
+export default App;

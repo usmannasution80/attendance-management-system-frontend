@@ -16,7 +16,7 @@ import QrScannerDialog from './QrScannerDialog';
 import ScannerAudioUrl from './../scanner.mp3';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
-export default () => {
+function AttendanceList(){
 
   const {
     _           ,
@@ -37,14 +37,6 @@ export default () => {
     return d.getFullYear() + '-' + zeroPadding(d.getMonth() + 1, 2) + '-' + zeroPadding(d.getDate(), 2);
   })());
 
-  /*const [logs, setLogs] = useState([]);
-  const logsRef = useRef({
-    logs,
-    addLog : (time, color, text) => {
-      logsRef.current.logs.push(time + ',' + color + ',' + text);
-      setLogs([...logsRef.current.logs]);
-    }
-  });*/
   const logs = useRef({
     list : [],
     time : 0,
@@ -353,3 +345,5 @@ export default () => {
     </>
   )
 }
+
+export default AttendanceList;

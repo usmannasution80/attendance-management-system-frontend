@@ -3,7 +3,7 @@ import {
   Button
 } from '@mui/material';
 
-export default () => {
+function Footer(){
   return (
     <Box sx={{textAlign:'center', py:3}}>
       <span>&copy; 2023-{new Date().getFullYear() + 5}</span>
@@ -17,3 +17,5 @@ export default () => {
     </Box>
   );
 }
+
+export default Footer;

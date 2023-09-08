@@ -1,7 +1,7 @@
 import {useRef, useEffect, useState} from 'react';
 import {Box} from '@mui/material';
 
-export default (props) => {
+function QrLogs(props){
   const {logs} = props;
   const logsRef = useRef(null);
   const [lastTime, setLastTime] = useState(null);
@@ -34,3 +34,5 @@ export default (props) => {
         </Box>
   );
 }
+
+export default QrLogs;

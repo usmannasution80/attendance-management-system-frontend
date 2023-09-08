@@ -4,7 +4,7 @@ import {
   Snackbar
 } from '@mui/material';
 
-export default () => {
+function MyAlert(){
 
   const {
     open,
@@ -27,3 +27,5 @@ export default () => {
     </Snackbar>
   );
 }
+
+export default MyAlert;

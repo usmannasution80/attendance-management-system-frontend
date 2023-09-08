@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {Grid} from '@mui/material';
 import Select from './Select';
 
-export default ({grade, department, cls, onChange}) => {
+function GradeForm({grade, department, cls, onChange}){
 
   const {
     minGrade,
@@ -69,4 +69,6 @@ export default ({grade, department, cls, onChange}) => {
 
     </Grid>
   );
-};
+}
+
+export default GradeForm;

@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import QrReader from 'react-qr-scanner';
 
-export default (props) => {
+function QrScanner(props){
 
   const {setStatus} = props;
 
@@ -45,3 +45,5 @@ export default (props) => {
       constraints={constraints}/>
   );
 }
+
+export default QrScanner;

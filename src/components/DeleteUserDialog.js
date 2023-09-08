@@ -6,7 +6,7 @@ import {
   Button
 } from '@mui/material';
 
-export default (props) => {
+function DeleteUserDialog(props){
 
   const {
     open,
@@ -77,4 +77,6 @@ export default (props) => {
     </Dialog>
 
   );
-};
+}
+
+export default DeleteUserDialog;

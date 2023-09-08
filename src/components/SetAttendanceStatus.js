@@ -5,7 +5,7 @@ import {
   Button
 } from '@mui/material';
 
-export default (props) => {
+function SetAttendanceStatus(props){
 
   const {
     open      ,
@@ -77,4 +77,6 @@ export default (props) => {
 
     </Dialog>
   );
-};
+}
+
+export default SetAttendanceStatus;

@@ -11,7 +11,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import DownloadIcon from '@mui/icons-material/Download';
 import LanguageIcon from '@mui/icons-material/Language';
 
-export default () => {
+function Menu(){
 
   const {
     _,
@@ -70,3 +70,5 @@ export default () => {
     </List>
   );
 }
+
+export default Menu;

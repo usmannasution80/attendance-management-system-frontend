@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import Title from './Title';
 
-export default () => {
+function DownloadCards(){
 
   const {_, axios, loading} = window.web;
 
@@ -30,4 +30,6 @@ export default () => {
       </Box>
     </>
   );
-};
+}
+
+export default DownloadCards;

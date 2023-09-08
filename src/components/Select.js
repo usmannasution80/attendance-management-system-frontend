@@ -5,7 +5,7 @@ import {
   MenuItem
 } from '@mui/material';
 
-export default (props) => {
+function MySelect(props){
 
   const {
     label,
@@ -39,3 +39,5 @@ export default (props) => {
   );
 
 }
+
+export default MySelect;

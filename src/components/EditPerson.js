@@ -18,7 +18,7 @@ import {useParams} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 
-export default () => {
+function EditPerson(){
 
   const {
     _,
@@ -200,4 +200,6 @@ export default () => {
     </>
   );
 
-};
+}
+
+export default EditPerson;

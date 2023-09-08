@@ -5,7 +5,7 @@ import {
   ListItemText
 } from '@mui/material';
 
-export default () => {
+function ChangeLanguage(){
 
   const {
     _,
@@ -39,4 +39,6 @@ export default () => {
       </List>
     </>
   );
-};
+}
+
+export default ChangeLanguage;

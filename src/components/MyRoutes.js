@@ -6,7 +6,7 @@ import DownloadCards from './DownloadCards';
 import ChangeLanguage from './ChangeLanguage';
 import Menu from './Menu';
 
-export default () => {
+function MyRoutes(){
 
   return (
     <Routes>
@@ -19,4 +19,6 @@ export default () => {
     </Routes>
   );
 
-};
+}
+
+export default MyRoutes;
