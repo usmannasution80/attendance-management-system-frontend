@@ -25,9 +25,10 @@ function MySelect(props){
         label={label}>
         {(() => {
           const items = [];
+          let i = 0;
           for(let val in values){
             items.push(
-              <MenuItem value={val}>
+              <MenuItem key={String(i++)} value={val}>
                 {values[val]}
               </MenuItem>
             );

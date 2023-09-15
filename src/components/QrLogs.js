@@ -24,7 +24,7 @@ function QrLogs(props){
             for(let log of logs.current.list){
               const [time, color, text] = log.split(',');
               logDivs.push(
-                <div style={{color, whiteSpace:'nowrap'}}>
+                <div key={String(time)} style={{color, whiteSpace:'nowrap'}}>
                   {time} : {text}
                 </div>
               );
