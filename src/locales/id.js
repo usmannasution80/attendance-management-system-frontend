@@ -23,6 +23,7 @@ export default {
   'lbl_scan' : 'Scan',
   'lbl_delete_user' : 'Hapus Orang',
   'lbl_download' : 'Unduh',
+  'lbl_back_to_login' : 'Kembali kehalaman login',
   'lbl_cancel' : 'Batal',
   'lbl_delete' : 'Hapus',
   'lbl_download_cards' : 'Unduh Kartu',

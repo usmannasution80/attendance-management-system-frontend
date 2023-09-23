@@ -25,6 +25,7 @@ export default {
   'lbl_cancel' : 'Cancel',
   'lbl_delete' : 'Delete',
   'lbl_download_cards' : 'Download Cards',
+  'lbl_back_to_login' : 'Back to login page',
   'lbl_delete_user' : 'Delete User',
   'lbl_change_language' : 'Change Language',
   'attendance_set_ongoing' : 'Updating :name\'s attendance status.',

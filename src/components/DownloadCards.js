@@ -15,7 +15,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 function DownloadCards(){
 
-  const {_, users, server} = window.web;
+  const {_, users, server, strg} = window.web;
   const [search, setSearch] = useState('');
   const rows = (() => {
     const rows = [];
@@ -62,7 +62,9 @@ function DownloadCards(){
 
   return (
     <>
-      <Title title={_('lbl_download_cards')}/>
+      {strg('is_login') &&
+        <Title title={_('lbl_download_cards')}/>
+      }
       <TextField
         placeholder={_('lbl_search')}
         onChange={onSearch}/>

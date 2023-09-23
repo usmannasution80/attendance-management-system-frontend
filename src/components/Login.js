@@ -8,6 +8,7 @@ import {
 import {useRef, useState} from 'react';
 import Footer from './Footer';
 import DownloadCards from './DownloadCards';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 function Login(){
 
@@ -59,7 +60,18 @@ function Login(){
 
         <Paper sx={{p:1}}>
 
-          {isDownloadCard && <DownloadCards/>}
+          {isDownloadCard &&
+            <>
+              <Box>
+                <Button
+                  onClick={e => setIsDownloadCard(false)}
+                  variant="text"
+                  startIcon={<KeyboardBackspaceIcon/>}
+                  children={_('lbl_back_to_login')}/>
+              </Box>
+              <DownloadCards/>
+            </>
+          }
 
           {!isDownloadCard &&
             <>
