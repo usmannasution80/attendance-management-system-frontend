@@ -5,8 +5,9 @@ import {
   Button,
   Grid
 } from '@mui/material';
-import {useRef} from 'react';
+import {useRef, useState} from 'react';
 import Footer from './Footer';
+import DownloadCards from './DownloadCards';
 
 function Login(){
 
@@ -24,6 +25,7 @@ function Login(){
 
   const email    = useRef('');
   const password = useRef('');
+  const [isDownloadCard, setIsDownloadCard] = useState(false);
   
   const loginHandler = e => {
 
@@ -57,29 +59,41 @@ function Login(){
 
         <Paper sx={{p:1}}>
 
-          <Box
-            component="h2"
-            sx={{textAlign:'center'}}>
-            {_('login_header')}
-          </Box>
+          {isDownloadCard && <DownloadCards/>}
 
-          <Box>
-
-            <TextField
-              label={_('lbl_email')}
-              onChange={e => email.current = e.target.value}/>
+          {!isDownloadCard &&
+            <>
+              <Box
+                component="h2"
+                sx={{textAlign:'center'}}>
+                {_('login_header')}
+              </Box>
     
-            <TextField
-              label={_('lbl_password')}
-              onChange={e => password.current = e.target.value}/>
-
-            <Button
-              fullWidth
-              children={_('btn_login')}
-              onClick={loginHandler}/>
-
-          </Box>
-
+              <Box>
+    
+                <TextField
+                  label={_('lbl_email')}
+                  onChange={e => email.current = e.target.value}/>
+        
+                <TextField
+                  label={_('lbl_password')}
+                  onChange={e => password.current = e.target.value}/>
+    
+                <Button
+                  fullWidth
+                  children={_('btn_login')}
+                  onClick={loginHandler}/>
+    
+                <Button
+                  fullWidth
+                  children={_('lbl_download_cards')}
+                  variant="text"
+                  onClick={e => setIsDownloadCard(true)}/>
+    
+              </Box>
+            </>
+          }
+    
           <Footer/>
 
         </Paper>

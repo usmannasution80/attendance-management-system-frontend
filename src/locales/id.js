@@ -27,6 +27,7 @@ export default {
   'lbl_delete' : 'Hapus',
   'lbl_download_cards' : 'Unduh Kartu',
   'lbl_change_language' : 'Ganti Bahasa',
+  'lbl_search' : 'Search ...',
   'attendance_set_ongoing' : 'Memperbarui status kehadiran :name.',
   'attendance_set_failed' : 'Gagal memperbarui status kehadiran :name.',
   'attendance_set_success' : 'Status kehadiran :name diperbarui dengan :status',

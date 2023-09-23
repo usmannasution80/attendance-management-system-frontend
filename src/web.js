@@ -6,7 +6,15 @@ import Cookie from './Cookie';
 const web =  {
 
   Cookie,
-
+  server : (() => {
+    let {
+      protocol,
+      hostname,
+      port
+    } = window.location;
+    port = 8000;
+    return `${protocol}//${hostname}:${port}/`;
+  })(),
   users          : {},
   minGrade       : 10,
   maxGrade       : 12,
@@ -94,7 +102,7 @@ const web =  {
       port
     } = window.location;
     port = 8000;
-    const server = `${protocol}//${hostname}:${port}/`;
+    const server = window.web.server;
 
     if(!/get/gi.test(config.method) && config.method !== undefined){
       await axios({
