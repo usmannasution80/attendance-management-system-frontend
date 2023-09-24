@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {
   Dialog,
   DialogContent,
@@ -7,23 +8,22 @@ import {
 import QrScanner from './QrScanner';
 import QrLogs from './QrLogs';
 
-export default (props) => {
+function QrScannerDialog(){
 
-  const {
-    open      ,
-    onClose   ,
-    logs      ,
-    setStatus ,
-  } = props;
+  const {component} = window.web;
+  const [render, setRender] = useState(-1);
+  component('QrScannerDialog', 'render', () => setRender(render * -1), false);
 
   return (
     <Dialog
-      open={open}
-      onClose={onClose}>
+      open={component('QrScannerDialog', 'open')}
+      onClose={e => component('QrScannerDialog', 'open', false)}>
       <DialogContent>
-        <QrScanner setStatus={setStatus}/>
-        <QrLogs logs={logs}/>
+        <QrScanner/>
+        <QrLogs/>
       </DialogContent>
     </Dialog>
   );
-};
+}
+
+export default QrScannerDialog;

@@ -7,13 +7,10 @@ import {
 } from '@mui/material';
 import QrReader from 'react-qr-scanner';
 
-function QrScanner(props){
+function QrScanner(){
 
-  const {setStatus} = props;
-
-  const {users, _} = window.web;
-
-  const logsRef = useRef(null);
+  const {users, _, component} = window.web;
+  const setStatus = component('AttendanceList', 'setStatus') || (() => 0);
 
   const constraints = {
     video : {

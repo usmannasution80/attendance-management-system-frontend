@@ -10,6 +10,7 @@ import Login from './components/Login';
 import Footer from './components/Footer';
 import Main from './components/Main';
 import Loading from './components/Loading';
+import QrScannerDialog from './components/QrScannerDialog';
 import BackgroundImage from './bg.jpg';
 window.web = web;
 
@@ -55,6 +56,7 @@ function App(){
             open={mobileMenu}
             onClose={e => setMobileMenu(!mobileMenu)}
             onOpen={e => setMobileMenu(!mobileMenu)}/>
+          <QrScannerDialog/>
         </>
       }
       {!strg('is_login') && <Login/>}

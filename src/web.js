@@ -27,6 +27,38 @@ const web =  {
     'tkr' : 2,
     'tsm' : 2,
   },
+  components:{
+    QrLogs : {
+      logs : {
+        list : [],
+        time : 0,
+        add(time, color, text){
+          this.list.push(time + ',' + color + ',' + text);
+          this.time = time;
+        },
+      }
+    }
+  },
+  component(component, property, value, rerender = true){
+
+    const components = window.web.components || {};
+
+    if(!components[component])
+      components[component] = {};
+
+    if(!property)
+      return components[component];
+
+    if(value === undefined)
+      return components[component][property];
+
+    components[component][property] = value;
+    window.web.components = components;
+
+    if(components[component].render && rerender)
+      components[component].render();
+
+  },
 
   _ : (key, values) => {
 

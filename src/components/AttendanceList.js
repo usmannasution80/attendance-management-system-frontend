@@ -12,7 +12,6 @@ import {
 import DateForm from './DateForm';
 import GradeForm from './GradeForm';
 import SetAttendanceStatus from './SetAttendanceStatus';
-import QrScannerDialog from './QrScannerDialog';
 import ScannerAudioUrl from './../scanner.mp3';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
@@ -26,9 +25,11 @@ function AttendanceList(){
     axios       ,
     users       ,
     zeroPadding ,
-    render      ,
     navigate    ,
+    component   ,
   } = window.web;
+  const [rndr, setRender] = useState(-1);
+  const render = () => setRender(rndr * -1);
 
   const [lastUpdate, setLastUpdate] = useState(0);
 
@@ -37,14 +38,7 @@ function AttendanceList(){
     return d.getFullYear() + '-' + zeroPadding(d.getMonth() + 1, 2) + '-' + zeroPadding(d.getDate(), 2);
   })());
 
-  const logs = useRef({
-    list : [],
-    time : 0,
-    add(time, color, text){
-      this.list.push(time + ',' + color + ',' + text);
-      this.time = time;
-    },
-  });
+  const logs = component('QrLogs', 'logs');
 
   const audio = useRef(null);
   const queue = useRef([]);
@@ -114,7 +108,7 @@ function AttendanceList(){
       + zeroPadding(d.getMonth() + 1, 2) + '-'
       + zeroPadding(d.getDate(), 2)
     );
-    setIsScan(true);
+    component('QrScannerDialog', 'open', true);
   };
 
   const setStatus = (id, status, qr = false) => {
@@ -134,14 +128,14 @@ function AttendanceList(){
     users[id].status = status;
     users[id].time   = Math.floor(Date.now());
 
-    logs.current.add(
+    logs.add(
       getTime(),
       'black',
       _('attendance_set_ongoing', {name : users[id].name})
     );
 
     if(prevStatus === status){
-      logs.current.add(
+      logs.add(
         getTime(),
         'green',
         _('attendance_set_success', {name : users[id].name, status : _(status)})
@@ -162,7 +156,7 @@ function AttendanceList(){
       loading : true
     }).then(r => {
 
-      logs.current.add(
+      logs.add(
         getTime(),
         'green',
         _('attendance_set_success', {name : users[id].name, status : _(status)})
@@ -175,7 +169,7 @@ function AttendanceList(){
       users[id].status = prevStatus;
       users[id].time   = prevTime;
 
-      logs.current.addLog(
+      logs.addLog(
         getTime(),
         'red',
         _('attendance_set_failed', {name : users[id].name})
@@ -189,6 +183,11 @@ function AttendanceList(){
 
   useEffect(() => {
     setAttendanceList();
+    if(!window.web.components.AttendanceList){
+      window.web.components.AttendanceList = {
+        setStatus
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -331,12 +330,6 @@ function AttendanceList(){
         userId={editId}
         setStatus={setStatus}
         date={fullDate}/>
-
-      <QrScannerDialog
-        open={isScan}
-        onClose={e => setIsScan(false)}
-        setStatus={setStatus}
-        logs={logs}/>
 
       <audio ref={audio} style={{display:'none'}}>
         <source src={ScannerAudioUrl}/>
