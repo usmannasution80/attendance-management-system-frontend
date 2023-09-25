@@ -193,7 +193,7 @@ const web =  {
 
       web.setUsersTimeout = setTimeout(web.setUsers, 10000);
 
-      if(updated)
+      if(updated || web.component('QrScannerDialog', 'open'))
         web.render();
 
     });
