@@ -26,6 +26,7 @@ function ChangeLanguage(){
           for(let lang in languages){
             els.push(
               <ListItemButton
+                key={lang}
                 onClick={e => Cookie.set('lang', lang)}
                 selected={Cookie.get('lang') === lang}>
                 <ListItemText>

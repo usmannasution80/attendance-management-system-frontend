@@ -16,7 +16,7 @@ function QrScannerDialog(){
 
   return (
     <Dialog
-      open={component('QrScannerDialog', 'open')}
+      open={!!component('QrScannerDialog', 'open')}
       onClose={e => component('QrScannerDialog', 'open', false)}>
       <DialogContent>
         <QrScanner/>

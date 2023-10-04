@@ -27,7 +27,7 @@ function DownloadCards(){
       if(!new RegExp('.*' + search + '.*', 'gi').test(user.name))
         continue;
       rows.push(
-        <TableRow>
+        <TableRow key={String(count)}>
           <TableCell>
             {user.name}
           </TableCell>
@@ -90,31 +90,6 @@ function DownloadCards(){
       </TableContainer>
     </>
   );
-
-  /*const {_, axios, loading} = window.web;
-
-  const download = e => {
-    loading(true);
-    axios({
-      url : 'user/download-cards'
-    }).then(r => {
-      loading(false);
-      window.open(r.data.url, '_blank');
-    });
-  };
-
-  return (
-    <>
-      <Box>
-        <Title title={_('lbl_download_cards')}/>
-        <Button
-          sx={{display:'block', mx:'auto'}}
-          onClick={download}>
-          {_('lbl_download')}
-        </Button>
-      </Box>
-    </>
-  );*/
 }
 
 export default DownloadCards;
