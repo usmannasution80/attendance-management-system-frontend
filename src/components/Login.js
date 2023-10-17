@@ -89,6 +89,7 @@ function Login(){
         
                 <TextField
                   label={_('lbl_password')}
+                  type="password"
                   onChange={e => password.current = e.target.value}/>
     
                 <Button
