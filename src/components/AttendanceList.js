@@ -278,6 +278,10 @@ function AttendanceList(){
                 if(user.is_student && isTeacher || user.is_teacher && isStudent)
                   continue;
 
+                if(isStudent)
+                  if(user.grade !== parseInt(grade) || user.department !== department || user['class'] !== parseInt(cls))
+                    continue;
+
                 let color;
                 switch (user.status) {
                   case 'present':
