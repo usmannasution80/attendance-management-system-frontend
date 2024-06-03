@@ -16,6 +16,8 @@ window.web = web;
 
 function App(){
 
+  document.title = window.web.title;
+
   const [render, setRender] = useState(1);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [isLogin, setIsLogin] = useState(false);

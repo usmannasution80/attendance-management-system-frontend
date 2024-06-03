@@ -4,7 +4,7 @@ import axios from 'axios';
 import Cookie from './Cookie';
 
 const web =  {
-
+  title : 'Absensi SMK Negeri 2 Panyabungan',
   Cookie,
   server : (() => {
     let {
