@@ -7,6 +7,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  TextField,
   Button
 } from '@mui/material';
 import DateForm from './DateForm';
@@ -59,6 +60,8 @@ function AttendanceList(){
     cls        : 1
   });
   const {grade, department, cls} = fullGrade;
+
+  const [searchName, setSearchName] = useState('');
 
   const setAttendanceListTimeout = useRef(null);
   const setAttendanceList = () => {
@@ -239,6 +242,11 @@ function AttendanceList(){
         </Box>
       }
 
+      <TextField
+        label={_('lbl_name')}
+        onChange={e => setSearchName(e.target.value)}/>
+
+
       <Box sx={{textAlign:'right'}}>
         <Button
           sx={{mb:1}}
@@ -273,6 +281,9 @@ function AttendanceList(){
                 const user = users[id];
 
                 if(!user)
+                  continue;
+
+                if(!new RegExp(searchName, 'i').test(user.name))
                   continue;
 
                 if(user.is_student && isTeacher || user.is_teacher && isStudent)
