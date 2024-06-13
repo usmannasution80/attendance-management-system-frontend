@@ -10,13 +10,22 @@ import {
   TextField      ,
 } from '@mui/material';
 import Title from './Title';
+import GradeForm from './GradeForm';
 import {useRef, useState} from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 
 function DownloadCards(){
 
-  const {_, users, server, strg} = window.web;
+  const {_, users, server, strg, minGrade, departments} = window.web;
   const [search, setSearch] = useState('');
+  const [isStudent, setIsStudent] = useState(true);
+  const isTeacher = !isStudent;
+  const [fullGrade, setFullGrade] = useState({
+    grade      : minGrade,
+    department : Object.keys(departments)[0],
+    cls        : 1
+  });
+  const {grade, department, cls} = fullGrade;
   const rows = (() => {
     const rows = [];
     let count = 30;
@@ -24,8 +33,17 @@ function DownloadCards(){
       if(count <= 0)
         break;
       const user = users[id];
+
       if(!new RegExp('.*' + search + '.*', 'gi').test(user.name))
         continue;
+
+      if(user.is_student && isTeacher || user.is_teacher && isStudent)
+        continue;
+
+      if(isStudent)
+        if(user.grade !== parseInt(grade) || user.department !== department || user['class'] !== parseInt(cls))
+          continue;
+
       rows.push(
         <TableRow key={String(count)}>
           <TableCell>
@@ -64,6 +82,27 @@ function DownloadCards(){
     <>
       {strg('is_login') &&
         <Title title={_('lbl_download_cards')}/>
+      }
+      <Box sx={{mb:1}}>
+        <span>{_('lbl_type')} : </span>
+        <Button
+          sx={{mx:1}}
+          color={isTeacher ? 'primary' : 'inherit'}
+          onClick={e => setIsStudent(false)}
+          children={_('teacher')}/>
+        <Button
+          color={isStudent ? 'primary' : 'inherit'}
+          onClick={e => setIsStudent(true)}
+          children={_('student')}/>
+      </Box>
+      {isStudent &&
+        <Box sx={{mb:1}}>
+          <GradeForm
+            grade={grade}
+            department={department}
+            cls={cls}
+            onChange={({grade, department, cls}) => setFullGrade({grade, department, cls})}/>
+        </Box>
       }
       <TextField
         placeholder={_('lbl_search')}
