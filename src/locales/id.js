@@ -29,6 +29,7 @@ export default {
   'lbl_download_cards' : 'Unduh Kartu',
   'lbl_change_language' : 'Ganti Bahasa',
   'lbl_search' : 'Search ...',
+  'lbl_download_all' : 'Download Semua',
   'attendance_set_ongoing' : 'Memperbarui status kehadiran :name.',
   'attendance_set_failed' : 'Gagal memperbarui status kehadiran :name.',
   'attendance_set_success' : 'Status kehadiran :name diperbarui dengan :status',

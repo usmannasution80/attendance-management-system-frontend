@@ -16,7 +16,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 function DownloadCards(){
 
-  const {_, users, server, strg, minGrade, departments} = window.web;
+  const {_, users, server, strg, minGrade, departments, loading, axios} = window.web;
   const [search, setSearch] = useState('');
   const [isStudent, setIsStudent] = useState(true);
   const isTeacher = !isStudent;
@@ -77,6 +77,10 @@ function DownloadCards(){
       setSearch(e.target.value);
     }, 500);
   };
+  const downloadAll = () => {
+    loading(true);
+    window.location.href = `${server}api/user/download-cards?grade=${grade}&department=${department}&class=${cls}&name=${search}`;
+  }
 
   return (
     <>
@@ -107,6 +111,10 @@ function DownloadCards(){
       <TextField
         placeholder={_('lbl_search')}
         onChange={onSearch}/>
+      <Button
+        onClick={downloadAll}
+        children={_('lbl_download_all')}
+        sx={{width:'100%'}}/>
       <TableContainer>
         <Table sx={{whitespace:'no-wrap'}}>
           <TableHead>

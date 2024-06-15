@@ -28,6 +28,7 @@ export default {
   'lbl_back_to_login' : 'Back to login page',
   'lbl_delete_user' : 'Delete User',
   'lbl_change_language' : 'Change Language',
+  'lbl_download_all' : 'Download All',
   'attendance_set_ongoing' : 'Updating :name\'s attendance status.',
   'attendance_set_failed' : 'Failed to update :name\'s attendance status.',
   'attendance_set_success' : ':name\'s attendance status updated with :status.',
