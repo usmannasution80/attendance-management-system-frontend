@@ -128,12 +128,6 @@ const web =  {
       config.loading = undefined;
     }
 
-    let {
-      protocol,
-      hostname,
-      port
-    } = window.location;
-    port = 8000;
     const server = window.web.server;
 
     if(!/get/gi.test(config.method) && config.method !== undefined){
